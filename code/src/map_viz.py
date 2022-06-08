@@ -28,7 +28,14 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
 
     '''
     # TODO : Draw the map base
-    return None
+
+    fig = px.choropleth_mapbox(montreal_data,
+        locations = 'locations',
+        color = 'z_vals',
+        range_color = 'colorscale',
+        )
+
+    return fig
 
 
 def add_scatter_traces(fig, street_df):
@@ -44,4 +51,9 @@ def add_scatter_traces(fig, street_df):
 
     '''
     # TODO : Add the scatter markers to the map base
-    return None
+
+    for street in street_df['street_name']:
+
+        fig = fig.add_trace(go.Scattermapbox(street_df))
+
+    return fig
