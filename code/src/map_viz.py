@@ -7,13 +7,13 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 import hover_template as hover
-
+import numpy as np
 
 def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
     '''
         Adds the choropleth trace, representing Montreal's neighborhoods.
 
-        Note: The z values and colorscale provided ensure every neighborhood
+        Note: The z values and colorscale provided ensure 000every neighborhood
         will be grey in color. Although the trace is defined using Plotly's
         choropleth features, we are simply defining our base map.
 
@@ -28,13 +28,17 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
 
     '''
     # TODO : Draw the map base
-
-    fig = px.choropleth_mapbox(montreal_data,
-        locations = 'locations',
-        color = 'z_vals',
-        range_color = 'colorscale',
-        )
-
+    fig=go.Figure(go.Choroplethmapbox(
+            name=montreal_data['name'],
+            geojson=montreal_data,
+            locations=locations,
+            z=z_vals,
+            customdata= locations,
+            featureidkey="properties.NOM",
+            below="",
+            showscale=False,
+            marker = dict(line=dict(color='white')),
+            colorscale=colorscale))
     return fig
 
 
@@ -51,9 +55,18 @@ def add_scatter_traces(fig, street_df):
 
     '''
     # TODO : Add the scatter markers to the map base
-
-    for street in street_df['street_name']:
-
-        fig = fig.add_trace(go.Scattermapbox(street_df))
+    fig_temp=px.scatter_mapbox(street_df,
+                          lat= "properties.LATITUDE", 
+                          lon="properties.LONGITUDE", 
+                          color="properties.TYPE_SITE_INTERVENTION",
+                          color_continuous_scale=px.colors.cyclical.IceFire,
+                          opacity=0.6,
+                          zoom = 12,
+                          custom_data=np.stack(["properties.OBJECTIF_THEMATIQUE", "properties.NOM_PROJET"], axis=-1),
+                          mapbox_style="carto-positron")
+    fig_temp.update_traces(marker={'size': 10})
+    
+    for i in range(len(fig_temp.data)):
+        fig.add_trace(fig_temp.data[i])
 
     return fig
