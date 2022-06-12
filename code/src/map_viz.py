@@ -37,12 +37,13 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
             featureidkey="properties.NOM",
             below="",
             showscale=False,
+            hovertemplate= hover.map_base_hover_template(),
             marker = dict(line=dict(color='white')),
             colorscale=colorscale))
 
-    fig.update_traces(
-        hovertemplate = hover.map_base_hover_template(),
-        )
+    #fig.update_traces(
+    #    hovertemplate = hover.map_base_hover_template(),
+    #    )
     return fig
 
 

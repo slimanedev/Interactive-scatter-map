@@ -3,7 +3,7 @@
 '''
 
 
-def map_base_hover_template(neighborhood):
+def map_base_hover_template():
     '''
         Sets the template for the hover tooltips on the neighborhoods.
 
@@ -14,7 +14,7 @@ def map_base_hover_template(neighborhood):
     '''
     # TODO : Generate the hover template
 
-    hover_map = '<span style="font-family:Oswald"></span>' +neighborhood+ '<br><extra></extra>'
+    hover_map = '<span style="font-family:Oswald"></span>%{customdata}<br><extra></extra>'
 
     return hover_map
 
