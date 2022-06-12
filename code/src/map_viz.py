@@ -40,10 +40,6 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
             hovertemplate= hover.map_base_hover_template(),
             marker = dict(line=dict(color='white')),
             colorscale=colorscale))
-
-    #fig.update_traces(
-    #    hovertemplate = hover.map_base_hover_template(),
-    #    )
     return fig
 
 
@@ -73,5 +69,9 @@ def add_scatter_traces(fig, street_df):
     
     for i in range(len(fig_temp.data)):
         fig.add_trace(fig_temp.data[i])
+        
+    for name in fig_temp.data:
+        fig.update_traces(fig_temp.data[name])
+    
 
     return fig
