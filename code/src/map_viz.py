@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 import hover_template as hover
-import numpy as np
+import numpy
 
 def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
     '''
@@ -62,7 +62,7 @@ def add_scatter_traces(fig, street_df):
                           color_continuous_scale=px.colors.cyclical.IceFire,
                           opacity=0.6,
                           zoom = 12,
-                          custom_data=np.stack(["properties.OBJECTIF_THEMATIQUE", "properties.NOM_PROJET"], axis=-1),
+                          custom_data=numpy.stack(["properties.OBJECTIF_THEMATIQUE", "properties.NOM_PROJET",'properties.MODE_IMPLANTATION'], axis=-1),
                           mapbox_style="carto-positron")
     fig_temp.update_traces(marker={'size': 10})
     

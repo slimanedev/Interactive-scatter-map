@@ -4,7 +4,6 @@
 '''
 import dash_html_components as html
 
-
 def no_clicks(style):
     '''
         Deals with the case where the map was not clicked
@@ -18,7 +17,8 @@ def no_clicks(style):
             style: The updated display style for the panel
     '''
     # TODO : Handle no clicks on the map
-    return None, None, None, None
+    if style['visibility']=='hidden':
+        return None, None, None, style
 
 
 def map_base_clicked(title, mode, theme, style):
@@ -38,7 +38,10 @@ def map_base_clicked(title, mode, theme, style):
             style: The updated display style for the panel
     '''
     # TODO : Handle clicks on the map base
-    return None, None, None, None
+    if style['visibility']=='hidden':
+        return None, None, None, style
+
+    return title, mode, theme,style
 
 
 def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa : E501 pylint: disable=unused-argument too-many-arguments line-too-long
@@ -59,5 +62,39 @@ def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa 
             theme: The updated display theme
             style: The updated display style for the panel
     '''
-    # TODO : Handle clicks on the markers
-    return None, None, None, None
+    # TODO : Handle clicks on the markers   
+    
+    #find the tilte and the color
+    title_txt=figure['data'][curve]['customdata'][point][1]
+    color_title=figure['data'][curve]['marker']['color']
+    title = [html.Span(title_txt , style={'color': color_title,'fontWeight':'bold'})]
+
+    #find the mode
+    mode_txt=figure['data'][curve]['customdata'][point][2]
+    mode = [html.Span(mode_txt , style={'fontWeight':'bold'})]
+
+    #find the theme
+    theme_txt=figure['data'][curve]['customdata'][point][0]
+    if theme_txt :
+        theme_list=list(theme_txt.split('\n'))
+        theme=[html.Span("Thématique :"),html.Ul(children=[html.Li(l) for l in theme_list])]
+    else : theme=None
+    
+    #Update the style
+    style['visibility']= 'visible'
+    style['marginTop']= 20
+  
+    return title, mode,theme,style
+
+
+
+#style = {'visibility': 'visible','border_color': 'red'}
+#title = html.Span('title', id='title')
+#mode = html.Span('title', id='mode')
+#theme = html.Span('title', id='theme')
+#print(figure['data'][curve]['customdata'][point])
+#curve=1 or 2 or 3
+#keys for data curve dict() : ['customdata', 'hovertemplate', 'lat', 'legendgroup', 'lon', 'marker', 'mode', 'name', 'showlegend', 'subplot', 'type']
+##For the hover template : print(figure['data'][curve]['name']) & print(figure['data'][curve]['legendgroup'])
+## print(figure['data'][curve]['marker']  contains the color {'color': '#00cc96', 'opacity': 0.6, 'size': 10}
+    
