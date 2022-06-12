@@ -31,4 +31,6 @@ def map_marker_hover_template(name):
             The hover template.
     '''
     # TODO : Generate the hover template
+
+    hover_scatter = '<span style="font-family:Oswald"></span>' +name+ '<br><extra></extra>'
     return ''
