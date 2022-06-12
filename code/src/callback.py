@@ -44,7 +44,7 @@ def map_base_clicked(title, mode, theme, style):
     return title, mode, theme,style
 
 
-def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa : E501 pylint: disable=unused-argument too-many-arguments line-too-long
+def map_marker_clicked(figure, curve, point, title, mode, theme, style): 
     '''
         Deals with the case where a marker is clicked
 
@@ -82,19 +82,8 @@ def map_marker_clicked(figure, curve, point, title, mode, theme, style): # noqa 
     
     #Update the style
     style['visibility']= 'visible'
-    style['marginTop']= 20
+    style['marginTop']= 25
   
     return title, mode,theme,style
 
-
-
-#style = {'visibility': 'visible','border_color': 'red'}
-#title = html.Span('title', id='title')
-#mode = html.Span('title', id='mode')
-#theme = html.Span('title', id='theme')
-#print(figure['data'][curve]['customdata'][point])
-#curve=1 or 2 or 3
-#keys for data curve dict() : ['customdata', 'hovertemplate', 'lat', 'legendgroup', 'lon', 'marker', 'mode', 'name', 'showlegend', 'subplot', 'type']
-##For the hover template : print(figure['data'][curve]['name']) & print(figure['data'][curve]['legendgroup'])
-## print(figure['data'][curve]['marker']  contains the color {'color': '#00cc96', 'opacity': 0.6, 'size': 10}
     
