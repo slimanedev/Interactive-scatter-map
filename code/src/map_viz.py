@@ -39,6 +39,10 @@ def add_choro_trace(fig, montreal_data, locations, z_vals, colorscale):
             showscale=False,
             marker = dict(line=dict(color='white')),
             colorscale=colorscale))
+
+    fig.update_traces(
+        hovertemplate = hover.map_base_hover_template(),
+        )
     return fig
 
 
