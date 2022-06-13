@@ -65,10 +65,8 @@ def add_scatter_traces(fig, street_df):
                           zoom = 12,
                           custom_data=numpy.stack(["properties.OBJECTIF_THEMATIQUE", "properties.NOM_PROJET",'properties.MODE_IMPLANTATION'], axis=-1),
                           mapbox_style="carto-positron",
-                          text="properties.TYPE_SITE_INTERVENTION",
                           hover_data={"properties.LATITUDE":False,"properties.LONGITUDE":False, "properties.TYPE_SITE_INTERVENTION":False},
                           hover_name="properties.TYPE_SITE_INTERVENTION",
-                          #custom_data="properties.TYPE_SITE_INTERVENTION"
                          )
     fig_temp.update_traces(marker={'size': 10})
     
