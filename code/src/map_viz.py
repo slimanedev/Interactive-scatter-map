@@ -68,10 +68,12 @@ def add_scatter_traces(fig, street_df):
                           hover_data={"properties.LATITUDE":False,"properties.LONGITUDE":False, "properties.TYPE_SITE_INTERVENTION":False},
                           hover_name="properties.TYPE_SITE_INTERVENTION",
                          )
-    fig_temp.update_traces(marker={'size': 10})
+
+    fig_temp.update_traces(marker={'size': 10}) # adapt marker size
     
     for i in range(len(fig_temp.data)):
-        fig.add_trace(fig_temp.data[i])
+        fig.add_trace(fig_temp.data[i]) # add each scatter over the map
 
-    fig_temp.update_traces(hovertemplate=hover.map_marker_hover_template())
+    fig_temp.update_traces(hovertemplate=hover.map_marker_hover_template()) # call the hover template
+
     return fig
