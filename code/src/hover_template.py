@@ -19,7 +19,7 @@ def map_base_hover_template():
     return hover_map
 
 
-def map_marker_hover_template(name):
+def map_marker_hover_template():
     '''
         Sets the template for the hover tooltips on the markers.
 
@@ -32,5 +32,5 @@ def map_marker_hover_template(name):
     '''
     # TODO : Generate the hover template
 
-    hover_scatter = '<span style="font-family:Oswald"></span>' +name+ '<br><extra></extra>'
-    return ''
+    hover_scatter = '<span style="font-family:Oswald"></span>%{hover_name}<br><extra></extra>'
+    return hover_scatter
